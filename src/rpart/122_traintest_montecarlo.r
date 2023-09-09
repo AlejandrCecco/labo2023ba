@@ -7,7 +7,8 @@ require("parallel")
 
 PARAM <- list()
 # reemplazar por las propias semillas
-PARAM$semillas <- c(110689, 240213, 260215, 121075, 110511)
+PARAM$semillas <- c(135791, 246813, 357951, 468135, 579321, 684753, 791265, 812439, 924567, 135797, 246813, 357951, 468135, 579321, 684753, 791265, 812439, 924567, 135799, 246813
+)
 
 #------------------------------------------------------------------------------
 # particionar agrega una columna llamada fold a un dataset que consiste
