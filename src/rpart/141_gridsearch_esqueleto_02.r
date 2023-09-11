@@ -134,7 +134,7 @@ for (vcp in c(-1, -0.7, -0.5, -0.2, 0, 0.5, 1)) {
     ) # profundidad máxima del arbol
 
     # Un solo llamado, con la semilla 17
-    ganancia_promedio <- ArbolesMontecarlo(ksemillas, param_basicos)
+    ganancia_promedio <- ArbolesMontecarlo(PARAM$semillas, param_basicos)
 
     # escribo los resultados al archivo de salida
     cat(
