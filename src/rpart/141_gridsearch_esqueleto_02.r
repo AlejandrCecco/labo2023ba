@@ -145,5 +145,7 @@ for (vcp in c(-1, -0.7, -0.5, -0.2, 0, 0.5, 1)) {
       vmin_split, "\t",
       ganancia_promedio, "\n"
     )
-  }
+        }
+     }
+    }
 }
