@@ -11,7 +11,7 @@ require("parallel")
 
 PARAM <- list()
 # reemplazar por las propias semillas
-PARAM$semillas <- c(110689, 121075, 240213, 260215, 110511)
+PARAM$semillas <- c(110689, 121075, 240214, 260216, 110512)
 
 #------------------------------------------------------------------------------
 # particionar agrega una columna llamada fold a un dataset
@@ -120,8 +120,12 @@ cat(
 
 # itero por los loops anidados para cada hiperparametro
 
-for (vmax_depth in c(4, 6, 8, 10, 12, 14)) {
-  for (vmin_split in c(1000, 800, 600, 400, 200, 100, 50, 20, 10)) {
+
+   for (vcp in c(-1, -0.7, -0.5, -0.2, 0, 0.5, 1)) {
+  for (vmax_depth in c(4, 6, 8, 10, 12, 14)) {
+    for (vmin_split in c(1000, 800, 600, 400, 200, 100, 50, 20, 10))) {
+      for (vmin_bucket in c(250, 350, 500, 600, 700, 800)) {
+   
     # notar como se agrega
 
     # vminsplit  minima cantidad de registros en un nodo para hacer el split
