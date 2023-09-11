@@ -121,7 +121,7 @@ cat(
 # itero por los loops anidados para cada hiperparametro
 for (vcp in c(-1, -0.7, -0.5, -0.2, 0, 0.5, 1)) {
   for (vmax_depth in c(4, 6, 8, 10, 12, 14)) {
-    for (vmin_split in c(1000, 800, 600, 400, 200, 100, 50, 20, 10))) {
+    for (vmin_split in c(1000, 800, 600, 400, 200, 100, 50, 20, 10)) {
       for (vmin_bucket in c(250, 350, 500, 600, 700, 800)) {
    
     # notar como se agrega
@@ -146,5 +146,8 @@ for (vcp in c(-1, -0.7, -0.5, -0.2, 0, 0.5, 1)) {
       vmin_split, "\t",
       ganancia_promedio, "\n"
     )
+      }
+    }
+   }
   }
-}
+
