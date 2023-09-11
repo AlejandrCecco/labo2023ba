@@ -119,9 +119,7 @@ cat(
 
 
 # itero por los loops anidados para cada hiperparametro
-
-
-   for (vcp in c(-1, -0.7, -0.5, -0.2, 0, 0.5, 1)) {
+for (vcp in c(-1, -0.7, -0.5, -0.2, 0, 0.5, 1)) {
   for (vmax_depth in c(4, 6, 8, 10, 12, 14)) {
     for (vmin_split in c(1000, 800, 600, 400, 200, 100, 50, 20, 10))) {
       for (vmin_bucket in c(250, 350, 500, 600, 700, 800)) {
@@ -130,9 +128,9 @@ cat(
 
     # vminsplit  minima cantidad de registros en un nodo para hacer el split
     param_basicos <- list(
-      "cp" = -0.5, # complejidad minima
+      "cp" = vcp, # complejidad minima
       "minsplit" = vmin_split,
-      "minbucket" = 5, # minima cantidad de registros en una hoja
+      "minbucket" = vmin_bucket, # minima cantidad de registros en una hoja
       "maxdepth" = vmax_depth
     ) # profundidad máxima del arbol
 
