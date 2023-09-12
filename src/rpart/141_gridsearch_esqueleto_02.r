@@ -112,18 +112,20 @@ archivo_salida <- "./exp/HT2020/gridsearch.txt"
 cat(
   file = archivo_salida,
   sep = "",
+  "cp", "\t",
   "max_depth", "\t",
   "min_split", "\t",
+  "min_bucket", "\t",
   "ganancia_promedio", "\n"
 )
 
 
 # itero por los loops anidados para cada hiperparametro
 
-for (vcp in c(-1, -0.7, -0.5, -0.2, 0, 0.5, 1)) {
-  for (vmax_depth in c(4, 6, 8, 10, 12, 14)) {
-    for (vmin_split in c(1000, 800, 600, 400, 200, 100, 50, 20, 10)) {
-      for (vmin_bucket in c(250, 350, 500, 600, 700, 800)) {
+for (vcp in c(-1, -0.5, -0.2, -0.1, 0)) {
+  for (vmax_depth in c(6, 8, 10, 12, 14)) {
+    for (vmin_split in c(1000, 800, 600, 400, 200, 100, 50)) {
+      for (vmin_bucket in c(10, 20, 50, 100, 200, 300)) {
 
     # vminsplit  minima cantidad de registros en un nodo para hacer el split
     param_basicos <- list(
