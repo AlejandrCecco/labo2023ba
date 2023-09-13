@@ -16,12 +16,13 @@ PARAM$semillas <- c(110689, 121075, 240214, 260216, 110512)
 #------------------------------------------------------------------------------
 # particionar agrega una columna llamada fold a un dataset
 #  que consiste en una particion estratificada segun agrupa
-# particionar( data=dataset, division=c(70,30), agrupa=clase_ternaria, seed=semilla)
+# particionar( data=dataset, division=c(70,30), agrupa=clase_binaria1, seed=semilla)
 #   crea una particion 70, 30
-
-particionar <- function(data, division, agrupa = "", campo = "fold", start = 1, seed = NA) {
+particionar <- function(
+  data, division, agrupa = "",
+  campo = "fold", start = 1, seed = NA) {
   if (!is.na(seed)) set.seed(seed)
-
+  
   bloque <- unlist(mapply(function(x, y) {
     rep(y, x)
   }, division, seq(from = start, length.out = length(division))))
@@ -34,11 +35,11 @@ particionar <- function(data, division, agrupa = "", campo = "fold", start = 1, 
 
 ArbolEstimarGanancia <- function(semilla, param_basicos) {
   # particiono estratificadamente el dataset
-  particionar(dataset, division = c(7, 3), agrupa = "clase_ternaria", seed = semilla)
+  particionar(dataset, division = c(7, 3), agrupa = "clase_binaria1", seed = semilla)
 
   # genero el modelo
-  # quiero predecir clase_ternaria a partir del resto
-  modelo <- rpart("clase_ternaria ~ .",
+  # quiero predecir clase_binaria1 a partir del resto
+  modelo <- rpart("clase_binaria1 ~ .",
     data = dataset[fold == 1], # fold==1  es training,  el 70% de los datos
     xval = 0,
     control = param_basicos
@@ -58,8 +59,8 @@ ArbolEstimarGanancia <- function(semilla, param_basicos) {
   # calculo la ganancia en testing  qu es fold==2
   ganancia_test <- dataset[
     fold == 2,
-    sum(ifelse(prediccion[, "BAJA+2"] > 0.025,
-      ifelse(clase_ternaria == "BAJA+2", 117000, -3000),
+    sum(ifelse(prediccion[, "Pos"] > 0.025,
+      ifelse(clase_binaria1 == "Pos", 117000, -3000),
       0
     ))
   ]
@@ -98,12 +99,16 @@ dataset <- fread("./datasets/dataset_pequeno.csv")
 # trabajo solo con los datos con clase, es decir 202107
 dataset <- dataset[clase_ternaria != ""]
 
+# Crear la nueva columna 
+dataset$clase_binaria1 <- ifelse(dataset$clase_ternaria %in% c("BAJA+1", "CONTINUA"), "Neg", "Pos")
+dataset$clase_ternaria <- NULL
+
 # genero el archivo para Kaggle
 # creo la carpeta donde va el experimento
 # HT  representa  Hiperparameter Tuning
 dir.create("./exp/", showWarnings = FALSE)
 dir.create("./exp/HT2022_02/", showWarnings = FALSE)
-archivo_salida <- "./exp/HT2022/gridsearch_binario.txt"
+archivo_salida <- "./exp/HT2022_02/gridsearch_binario.txt"
 
 # Escribo los titulos al archivo donde van a quedar los resultados
 # atencion que si ya existe el archivo, esta instruccion LO SOBREESCRIBE,
