@@ -14,6 +14,7 @@ require("randomForest") # solo se usa para imputar nulos
 
 require("lightgbm")
 
+MIS_SEMILLAS = c(110689, 121075, 240214, 260216, 110512)
 
 # Parametros del script
 PARAM <- list()
@@ -21,18 +22,18 @@ PARAM$experimento <- "FE6310"
 
 PARAM$exp_input <- "DR6210"
 
-PARAM$lag1 <- FALSE
+PARAM$lag1 <- TRUE
 PARAM$lag2 <- TRUE
-PARAM$lag3 <- TRUE
+PARAM$lag3 <- FALSE
 
 PARAM$Tendencias1$run <- TRUE
 PARAM$Tendencias1$ventana <- 6
 PARAM$Tendencias1$tendencia <- TRUE
-PARAM$Tendencias1$minimo <- TRUE
-PARAM$Tendencias1$maximo <- TRUE
-PARAM$Tendencias1$promedio <- TRUE
-PARAM$Tendencias1$ratioavg <- TRUE
-PARAM$Tendencias1$ratiomax <- TRUE
+PARAM$Tendencias1$minimo <- FALSE
+PARAM$Tendencias1$maximo <- FALSE
+PARAM$Tendencias1$promedio <- FALSE
+PARAM$Tendencias1$ratioavg <- FALSE
+PARAM$Tendencias1$ratiomax <- FALSE
 
 PARAM$Tendencias2$run <- FALSE
 PARAM$Tendencias2$ventana <- 6
@@ -45,19 +46,19 @@ PARAM$Tendencias2$ratiomax <- FALSE
 
 
 PARAM$RandomForest$run <- TRUE
-PARAM$RandomForest$num.trees <- 100
-PARAM$RandomForest$max.depth <- 10
-PARAM$RandomForest$min.node.size <- 100
-PARAM$RandomForest$mtry <- 50
-PARAM$RandomForest$semilla <- 110689 # cambiar por la propia semilla
+PARAM$RandomForest$num.trees <- 20
+PARAM$RandomForest$max.depth <- 4
+PARAM$RandomForest$min.node.size <- 1000
+PARAM$RandomForest$mtry <- 40
+PARAM$RandomForest$semilla <- MIS_SEMILLAS[1]
 
 
 # varia de 0.0 a 2.0, si es 0.0 NO se activan
-PARAM$CanaritosAsesinos$ratio <- 1.2
+PARAM$CanaritosAsesinos$ratio <- 0.0
 # desvios estandar de la media, para el cutoff
 PARAM$CanaritosAsesinos$desvios <- 4.0
 # cambiar por la propia semilla
-PARAM$CanaritosAsesinos$semilla <- 121075
+PARAM$CanaritosAsesinos$semilla <- MIS_SEMILLAS[2]
 
 PARAM$home <- "~/buckets/b1/"
 # FIN Parametros del script
