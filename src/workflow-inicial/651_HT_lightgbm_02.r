@@ -1,4 +1,4 @@
-# Experimentos Colaborativos Default
+# Experimentos Colaborativos Default - Experimento colaborativo 01 - GRUPO B 
 # Hyperparameter Tuning  lightgbm
 
 # pensado para datasets con UNDERSAPLING de la clase mayoritaria
