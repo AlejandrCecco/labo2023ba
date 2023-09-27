@@ -1,4 +1,4 @@
-# Experimentos Colaborativos Default - Exerimento 1 - GRUPO B 
+# Experimentos Colaborativos Default
 # Workflow  Feature Engineering historico
 
 # limpio la memoria
@@ -18,13 +18,13 @@ MIS_SEMILLAS = c(110689, 121075, 240214, 260216, 110512)
 
 # Parametros del script
 PARAM <- list()
-PARAM$experimento <- "FE6310_02"
+PARAM$experimento <- "FE6310_08"
 
 PARAM$exp_input <- "DR6210"
 
-PARAM$lag1 <- TRUE
-PARAM$lag2 <- TRUE
-PARAM$lag3 <- TRUE
+PARAM$lag1 <- FALSE
+PARAM$lag2 <- FALSE
+PARAM$lag3 <- FALSE
 
 PARAM$Tendencias1$run <- TRUE
 PARAM$Tendencias1$ventana <- 6
@@ -36,7 +36,7 @@ PARAM$Tendencias1$ratioavg <- FALSE
 PARAM$Tendencias1$ratiomax <- FALSE
 
 PARAM$Tendencias2$run <- TRUE
-PARAM$Tendencias2$ventana <- 6
+PARAM$Tendencias2$ventana <- 12
 PARAM$Tendencias2$tendencia <- TRUE
 PARAM$Tendencias2$minimo <- FALSE
 PARAM$Tendencias2$maximo <- TRUE
@@ -82,7 +82,7 @@ GrabarOutput <- function() {
 #  tendencia calculada con cuadrados minimos
 # la formula de calculo de la tendencia puede verse en
 #  https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Book%3A_Introductory_Statistics_(Shafer_and_Zhang)/10%3A_Correlation_and_Regression/10.04%3A_The_Least_Squares_Regression_Line
-# para la max�ma velocidad esta funcion esta escrita en lenguaje C,
+# para la maxíma velocidad esta funcion esta escrita en lenguaje C,
 # y no en la porqueria de R o Python
 
 cppFunction("NumericVector fhistC(NumericVector pcolumna, IntegerVector pdesde )
@@ -248,7 +248,7 @@ AgregaVarRandomForest <- function(
       (clase01 == 1 | azar < 0.10))]
 
   # imputo los nulos, ya que ranger no acepta nulos
-  # Leo Breiman, �por que le temias a los nulos?
+  # Leo Breiman, ¿por que le temias a los nulos?
   set.seed(semilla, kind = "L'Ecuyer-CMRG")
   dataset_rf <- na.roughfix(dataset_rf)
 
@@ -321,7 +321,7 @@ fganancia_lgbm_meseta <- function(probs, datos) {
   tbl[, gan_acum := cumsum(gan)]
   setorder(tbl, -gan_acum) # voy por la meseta
 
-  gan <- mean(tbl[1:500, gan_acum]) # meseta de tama�o 500
+  gan <- mean(tbl[1:500, gan_acum]) # meseta de tamaño 500
 
   pos_meseta <- tbl[1:500, median(posicion)]
   VPOS_CORTE <<- c(VPOS_CORTE, pos_meseta)
@@ -337,13 +337,13 @@ fganancia_lgbm_meseta <- function(probs, datos) {
 #  de la capa geologica de canaritos
 # se llama varias veces, luego de agregar muchas variables nuevas,
 #  para ir reduciendo la cantidad de variables
-# y as� hacer lugar a nuevas variables importantes
+# y así hacer lugar a nuevas variables importantes
 
 GVEZ <- 1
 
 CanaritosAsesinos <- function(
     canaritos_ratio = 0.2,
-    canaritos_desvios = 3.0, canaritos_semilla = MIS_SEMILLAS[3]) {
+    canaritos_desvios = 3.0, canaritos_semilla = 999983) {
   gc()
   dataset[, clase01 := ifelse(clase_ternaria == "CONTINUA", 0, 1)]
 
